@@ -572,7 +572,7 @@ function Show-Tree {
         Write-Host "  ${Dim}No USB input devices detected${Reset}"
     } else {
         # Warning if no direct CPU USB
-        if (-not $Data.HasChip0) {
+        if ($chip0Devs.Count -eq 0) {
             Write-Host "  ${Orange}! This system has no direct CPU USB${Reset}"
             Write-Host "  ${Dim}  1 chip is your best option here${Reset}"
             Write-Host ""
