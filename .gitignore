@@ -1,0 +1,3 @@
+dist/
+*.backup.json
+usb-report.json
