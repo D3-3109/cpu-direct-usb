@@ -7,7 +7,7 @@ $root = Split-Path $PSScriptRoot -Parent
 if ([string]::IsNullOrWhiteSpace($OutputDirectory)) { $OutputDirectory = Join-Path $root 'dist' }
 $files = @('cpudirect.ps1', 'lib/Topology.ps1', 'lib/Settings.ps1', 'lib/Display.ps1',
     'README.md', 'LICENSE', 'CHANGELOG.md', 'VALIDATION.md', 'tests/Run.Tests.ps1', 'tests/Topology.Tests.ps1',
-    'tests/Settings.Tests.ps1', 'tests/EntryPoint.Tests.ps1', 'tools/Package.ps1', '.gitignore')
+    'tests/Settings.Tests.ps1', 'tests/EntryPoint.Tests.ps1', 'tests/Launcher.Tests.ps1', 'run.ps1', 'tools/Package.ps1', '.gitignore')
 $hashes = foreach ($relative in $files) {
     $path = Join-Path $root $relative
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "缺少发布文件：$relative" }
