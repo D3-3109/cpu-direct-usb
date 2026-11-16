@@ -4,9 +4,29 @@
 
 **默认只读扫描。控制器归属是型号表提供的推测，不是实测延迟，也不是主板布线的最终证明。** 设备名、芯片型号、硬件 ID 和系统返回的错误信息保留原文，便于核对。
 
-## 运行
+## 一行启动
 
-支持 Windows 10/11 的 Windows PowerShell 5.1。无需安装第三方依赖；请下载本分支的完整源码目录，保留 `lib` 文件夹。在解压后的目录打开 PowerShell：
+在 Windows PowerShell 5.1 中复制运行（普通权限即可扫描）：
+
+```powershell
+irm https://raw.githubusercontent.com/D3-3109/cpu-direct-usb/main/run.ps1 | iex
+```
+
+命令从本仓库获取启动器，再把同一固定提交的主脚本和三个 `lib` 模块下载到独立临时目录，全部通过 SHA256 校验后启动，默认只读扫描。文件目录会显示在终端中，运行后保留，便于查看源码或再次使用。`main/run.ps1` 会随仓库更新；内置校验保证运行文件与启动器清单一致，不替代对仓库来源的信任。
+
+启动器不请求提权，只为新开的 PowerShell 子进程指定 `-ExecutionPolicy Bypass`，不修改用户或系统执行策略；子进程继承当前终端已有权限，组织策略仍可能阻止运行。下载失败或校验不匹配时不会执行分析脚本。
+
+需要进入配置菜单时，在管理员 PowerShell 中显式运行：
+
+```powershell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/D3-3109/cpu-direct-usb/main/run.ps1))) -Configure
+```
+
+配置模式仍需在菜单中选择操作；直接回车跳过。下载前想先审阅，可打开 [run.ps1](run.ps1) 和下面的离线运行方式。
+
+## 离线运行
+
+支持 Windows 10/11 的 Windows PowerShell 5.1。无需安装第三方依赖；请下载本仓库的完整源码目录，保留 `lib` 文件夹。在解压后的目录打开 PowerShell：
 
 ```powershell
 .\cpudirect.ps1
